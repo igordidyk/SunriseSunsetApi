@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private static final String STATUS_OK = "OK";
     private static final String STATUS_INVALID_REQUEST = "INVALID_REQUEST";
     private static final String STATUS_INVALID_DATE = "INVALID_DATE";
+
     private static final String STATUS_UNKNOWN_ERROR = "UNKNOWN_ERROR";
 
 
@@ -102,7 +103,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 try {
 
                     String status = response.getString("status");
-                    if (status.equals(STATUS_OK)) {
+                    if (status.equalsIgnoreCase(STATUS_OK)) {
                         JSONObject results = response.getJSONObject("results");
                         String sunrise = results.getString("sunrise");
                         String sunset = results.getString("sunset");
@@ -110,6 +111,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         sunriseTV.setText("Sunrise time: " + sunrise);
                         sunsetTV.setText("Sunset time: " + sunset);
                         dayLengthTV.setText("Day length: " + day_length);
+                    } else if (status.equalsIgnoreCase(STATUS_INVALID_REQUEST)) {
+                        Toast.makeText(MainActivity.this, "Either latitude or longitude parameters are missing or invalid", Toast.LENGTH_LONG).show();
+                    } else if (status.equalsIgnoreCase(STATUS_INVALID_DATE)) {
+                        Toast.makeText(MainActivity.this, "Date parameter is missing or invalid", Toast.LENGTH_LONG).show();
+                    } else if (status.equalsIgnoreCase(STATUS_UNKNOWN_ERROR)) {
+                        Toast.makeText(MainActivity.this, "Request could not be processed due to a server error. The request may succeed if you try again.", Toast.LENGTH_LONG).show();
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
