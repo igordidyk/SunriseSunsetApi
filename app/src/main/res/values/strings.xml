@@ -1,6 +1,4 @@
 <resources>
-    <string name="app_name">SunsireSunsetApi</string>
+    <string name="app_name">SunriseSunsetApi</string>
     <string name="my_api_key">AIzaSyBpukxsiedd3oACL3U21Mkmd32iaCri53U</string>
-    <string name="sunrise">Sunrise: </string>
-    <string name="sunset">Sunset: </string>
 </resources>
